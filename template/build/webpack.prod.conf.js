@@ -45,7 +45,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
         ? 'index.html'
-        : config.build.index,
+        : {{/if_or}}config.build.index,
       template: 'wwwroot/index.html',
       inject: true,
       minify: {
