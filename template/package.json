@@ -13,10 +13,11 @@
     "{{ name }}": "./dist/bin/start"
   },
   "scripts": {
-    "coffee": "coffee -bc build server",
-    "dev": "node build/dev-server.js",
+    "dev:html": "node build/dev-server.js",
+    "dev:server": "babel-node server/main.js",
+    "dev": "npm run dev:html && npm run dev:server",
     "build:html": "node build/build-html.js",
-    "build:server": "npm run coffee && node build/build-server.js",
+    "build:server": "node build/build-server.js",
     "build": "npm run build:html && npm run build:server"{{#unit}},
     "unit:html": "karma start wwwroot/test/unit/karma.conf.js --single-run"{{/unit}}{{#e2e}},
     "e2e:html": "node wwwroot/test/e2e/runner.js"{{/e2e}}{{#if_or unit e2e}},
@@ -24,7 +25,7 @@
     "lint": "eslint --ext .js,.vue src{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}"{{/lint}}
   },
   "dependencies": {
-    "argparse": "^1.0.9",
+    "commander": "^2.9.0",
     "express": "^4.13.3",
     "lodash": "^4.16.4",
     "serve-favicon": "^2.3.0"
@@ -32,6 +33,7 @@
   "devDependencies": {
     "vue": "^2.0.1",
     "autoprefixer": "^6.4.0",
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.0.0",
     {{#lint}}
     "babel-eslint": "^7.0.0",
@@ -100,8 +102,6 @@
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.3",
     "webpack-hot-middleware": "^2.12.2",
-    "webpack-merge": "^0.14.1",
-    "coffee-loader": "^0.7.2",
-    "coffee-script": "^1.11.1"
+    "webpack-merge": "^0.14.1"
   }
 }
