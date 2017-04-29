@@ -1,6 +1,6 @@
 # vue-webpack-with-node-server
 
-> A full-featured Webpack setup with hot-reload, node-server, lint-on-save, unit testing & css extraction.
+> A full-featured Webpack2 setup with hot-reload, node-server, lint-on-save, unit testing & css extraction.
 
 > This template is Vue 2.0 compatible.
 
@@ -20,6 +20,8 @@ $ npm install
 $ npm run dev
 ```
 
+If port 8080 is already in use on your machine you must change the port number in `/config/index.js`. Otherwise `npm run dev` will fail.
+
 ## What's Included
 
 - `npm run dev`: first-in-class development experience.
@@ -30,14 +32,15 @@ $ npm run dev
   - Source maps
 
 - `npm run build`: Production ready build.
-  - build node server use webpack
+  - build node server use webpack2
   - JavaScript minified with [UglifyJS](https://github.com/mishoo/UglifyJS2).
   - HTML minified with [html-minifier](https://github.com/kangax/html-minifier).
   - CSS across all components extracted into a single file and minified with [cssnano](https://github.com/ben-eb/cssnano).
   - All static assets compiled with version hashes for efficient long-term caching, and a production `index.html` is auto-generated with proper URLs to these generated assets.
+  - Use `npm run build --report`to build with bundle size analytics.
 
 - `npm run unit`: Unit tests run in PhantomJS with [Karma](http://karma-runner.github.io/0.13/index.html) + [Mocha](http://mochajs.org/) + [karma-webpack](https://github.com/webpack/karma-webpack).
-  - Supports ES2015 in test files.
+  - Supports ES2015+ in test files.
   - Supports all webpack loaders.
   - Easy mock injection.
 

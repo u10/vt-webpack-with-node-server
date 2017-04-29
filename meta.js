@@ -26,19 +26,23 @@ module.exports = {
     },
     "build": {
       "type": "list",
-      "message": "Vue comes in two build versions, which do you want to use?",
+      "message": "Vue build",
       "choices": [
         {
-          "name": "Runtime-only: lighter, but no support for templates defined in .html files (.vue files are fine)",
-          "value": "runtime",
-          "short": "runtime"
-        },
-        {
-          "name": "Standalone: heavier, because it includes the template parser to allow templates in .html files",
+          "name": "Runtime + Compiler: recommended for most users",
           "value": "standalone",
           "short": "standalone"
+        },
+        {
+          "name": "Runtime-only: about 6KB lighter min+gzip, but templates (or any Vue-specific HTML) are ONLY allowed in .vue files - render functions are required elsewhere",
+          "value": "runtime",
+          "short": "runtime"
         }
       ]
+    },
+    "router": {
+      "type": "confirm",
+      "message": "Install vue-router?"
     },
     "lint": {
       "type": "confirm",
@@ -55,9 +59,9 @@ module.exports = {
           "short": "Standard"
         },
         {
-          "name": "AirBNB (https://github.com/airbnb/javascript)",
+          "name": "Airbnb (https://github.com/airbnb/javascript)",
           "value": "airbnb",
-          "short": "AirBNB"
+          "short": "Airbnb"
         },
         {
           "name": "none (configure it yourself)",
@@ -80,7 +84,9 @@ module.exports = {
     ".eslintignore": "lint",
     "config/test.env.js": "unit || e2e",
     "test/unit/**/*": "unit",
-    "test/e2e/**/*": "e2e"
+    "build/webpack.test.conf.js": "unit",
+    "test/e2e/**/*": "e2e",
+    "src/router/**/*": "router"
   },
-  "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
+  "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
 };

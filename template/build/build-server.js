@@ -8,6 +8,10 @@ const projectRoot = path.resolve(__dirname, '../')
 
 const spinner = ora('building for production...')
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 spinner.start()
 
 const pkg = {
@@ -59,37 +63,32 @@ webpack({
     __dirname: false
   },
   externals: nodeModules,
+  resolve: {
+    extensions: ['.js']
+  },
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'eslint',
-        include: projectRoot,
-        exclude: /node_modules/
-      }
-    ],
-    loaders: [
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('server')]
+      },
       {
         test: /\.js$/,
-        loader: 'babel',
-        include: projectRoot,
-        exclude: /node_modules/
+        loader: 'babel-loader',
+        include: [resolve('server')]
       }
     ]
-  },
-  resolve: {
-    extensions: ['', '.js']
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
-      }
+      },
+      sourceMap: true
     })
   ],
-  eslint: {
-    formatter: require('eslint-friendly-formatter')
-  }
 }, function (err, stats) {
   spinner.stop()
   if (err) {
